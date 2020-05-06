@@ -3,9 +3,5 @@ management:
     web:
       base-path: /
 
-spring:
-  kafka:
-    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
-
 github:
   acess-token: 627b0ac5ae9ed6d6ea8659bdb08bdfa2586af0a2
