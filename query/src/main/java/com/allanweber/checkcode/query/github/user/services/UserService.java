@@ -1,8 +1,8 @@
 package com.allanweber.checkcode.query.github.user.services;
 
-import com.allanweber.checkcode.query.github.dto.QueryResponse;
-import com.allanweber.checkcode.query.github.services.GitHubClient;
-import com.allanweber.checkcode.query.github.dto.User;
+import com.allanweber.checkcode.github.dto.QueryResponse;
+import com.allanweber.checkcode.github.dto.User;
+import com.allanweber.checkcode.github.services.GitHubClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

@@ -2,6 +2,3 @@ management:
   endpoints:
     web:
       base-path: /
-
-github:
-  acess-token: 627b0ac5ae9ed6d6ea8659bdb08bdfa2586af0a2

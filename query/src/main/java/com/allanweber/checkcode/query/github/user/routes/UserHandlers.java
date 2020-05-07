@@ -1,6 +1,6 @@
 package com.allanweber.checkcode.query.github.user.routes;
 
-import com.allanweber.checkcode.query.github.dto.User;
+import com.allanweber.checkcode.github.dto.User;
 import com.allanweber.checkcode.query.github.user.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

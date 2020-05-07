@@ -1,7 +1,7 @@
 package com.allanweber.checkcode.command.config;
 
-import com.allanweber.checkcode.command.account.dto.AccountRequest;
 import com.allanweber.checkcode.common.dto.Message;
+import com.allanweber.checkcode.common.dto.ReportProperties;
 import com.allanweber.checkcode.kafka_producer.KafkaProducerService;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -25,7 +25,7 @@ class KafkaConfiguration {
     private final KafkaProperties properties;
 
     @Bean
-    public KafkaProducerService<AccountRequest> getProducerAccountRequest(){
+    public KafkaProducerService<ReportProperties> getProducer(){
         return new KafkaProducerService<>(properties.getBootstrapServers());
     }
 

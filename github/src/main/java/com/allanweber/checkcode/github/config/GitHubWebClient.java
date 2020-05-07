@@ -1,30 +1,34 @@
-package com.allanweber.checkcode.query.github.config;
+package com.allanweber.checkcode.github.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-
-@Configuration
 @Slf4j
 public class GitHubWebClient {
 
-    @Bean
-    public WebClient buildGitHubWebClient() {
+    private final WebClient client;
+
+    public GitHubWebClient() {
+        this.client = buildGitHubWebClient();
+    }
+
+    public WebClient getClient() {
+        return client;
+    }
+
+    private WebClient buildGitHubWebClient() {
         return WebClient.builder()
                 .baseUrl("https://api.github.com")
                 .filter(logRequest())
                 .filter(errorResponse())
-                .defaultHeader("Authorization", "Bearer 627b0ac5ae9ed6d6ea8659bdb08bdfa2586af0a2")
+                .defaultHeader("Authorization", "Bearer 2c06859d8bbf27f4088caa477dbde81f689e73f6")
                 .build();
     }
 
-    private static ExchangeFilterFunction logRequest() {
+    private ExchangeFilterFunction logRequest() {
         return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
             log.info("Request: {} {}", clientRequest.method(), clientRequest.url());
             return Mono.just(clientRequest);
@@ -35,7 +39,7 @@ public class GitHubWebClient {
         return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             if (clientResponse.statusCode().isError()) {
                 clientResponse.bodyToMono(String.class)
-                        .flatMap(ex -> Mono.error(new HttpClientErrorException(INTERNAL_SERVER_ERROR, ex)));
+                        .map(ex -> Mono.error(new HttpClientErrorException(clientResponse.statusCode(), ex)));
             }
             return Mono.just(clientResponse);
         });

@@ -1,4 +1,4 @@
-package com.allanweber.checkcode.query.github.dto;
+package com.allanweber.checkcode.github.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

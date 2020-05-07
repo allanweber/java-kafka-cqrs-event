@@ -20,7 +20,7 @@ import java.util.concurrent.Future;
 @Slf4j
 public class KafkaProducerService<T> {
 
-    private final KafkaProducer<String, Message<T>> producer;
+    private final KafkaProducer<String, T> producer;
 
     public KafkaProducerService(List<String> bootstrapServers) {
         this.producer = new KafkaProducer<>(properties(bootstrapServers));
@@ -40,8 +40,7 @@ public class KafkaProducerService<T> {
     }
 
     public Future<RecordMetadata> sendAsync(String topic, String key, T payload) {
-        var value = new Message<>(new CorrelationId(), payload);
-        var record = new ProducerRecord<>(topic, key, value);
+        var record = new ProducerRecord<>(topic, key, payload);
         return producer.send(record, (data, ex) -> {
             if(ex != null){
                 log.error("Error to send message to topic {}: {}", topic, ex.getMessage(), ex);

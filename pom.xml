@@ -7,6 +7,8 @@
         <module>kafka-producer</module>
         <module>consumer-log</module>
         <module>query</module>
+        <module>github</module>
+        <module>report</module>
     </modules>
 
     <parent>
