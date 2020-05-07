@@ -1,4 +1,4 @@
-package com.allanweber.checkcode.query.github.user.routes;
+package com.allanweber.checkcode.query.github.user;
 
 import com.allanweber.checkcode.github.dto.User;
 import com.allanweber.checkcode.query.github.user.services.UserService;

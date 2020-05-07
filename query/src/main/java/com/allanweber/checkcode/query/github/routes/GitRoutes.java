@@ -1,6 +1,7 @@
-package com.allanweber.checkcode.query.github.user.routes;
+package com.allanweber.checkcode.query.github.routes;
 
-import lombok.RequiredArgsConstructor;
+import com.allanweber.checkcode.query.github.repository.ReportHandlers;
+import com.allanweber.checkcode.query.github.user.UserHandlers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -13,14 +14,14 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.n
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-@RequiredArgsConstructor
-public class UserRoutes {
-
-    private final UserHandlers handlers;
+public class GitRoutes {
 
     @Bean
-    public RouterFunction<?> routes() {
-        return nest(path("/github/users"),
-                        route(GET("/").and(accept(APPLICATION_JSON)), handlers::getUsers));
+    public RouterFunction<?> userRoutes(UserHandlers userHandlers, ReportHandlers reportHandlers) {
+        return nest(path("/github"),
+                route(GET("/users").and(accept(APPLICATION_JSON)), userHandlers::getUsers)
+                .and(route(GET("/reports/{id}").and(accept(APPLICATION_JSON)), reportHandlers::getReport))
+                .and(route(GET("/reports/{id}/repositories").and(accept(APPLICATION_JSON)), reportHandlers::getRepositories))
+        );
     }
 }

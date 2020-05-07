@@ -1,4 +1,4 @@
-package com.allanweber.checkcode.command.github.repositories;
+package com.allanweber.checkcode.query.github.repository.repositories;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +14,4 @@ public class ReportEntity {
     private String user;
 
     private String provider;
-
-    public ReportEntity(String user, String provider) {
-        this.user = user;
-        this.provider = provider;
-    }
 }

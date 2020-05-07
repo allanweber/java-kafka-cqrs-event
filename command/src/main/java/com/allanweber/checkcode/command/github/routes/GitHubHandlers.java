@@ -27,7 +27,7 @@ public class GitHubHandlers {
                 .orElseThrow(() -> new HttpClientErrorException(BAD_REQUEST, "Invalid user"));
 
         return service.startReport(user)
-                .flatMap(report -> created(URI.create("/reports/" + report.getId()))
+                .flatMap(report -> created(URI.create("/reports/" + report.getUser()))
                         .contentType(APPLICATION_JSON)
                         .bodyValue(report));
     }

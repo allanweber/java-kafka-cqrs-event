@@ -18,6 +18,6 @@ public class GitHubRoutes {
 
     @Bean
     public RouterFunction<?> routes() {
-        return route(POST("/report").and(accept(APPLICATION_JSON)), handler::startNewReport);
+        return route(POST("/reports").and(accept(APPLICATION_JSON)), handler::startNewReport);
     }
 }

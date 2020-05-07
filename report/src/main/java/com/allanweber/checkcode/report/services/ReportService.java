@@ -18,6 +18,7 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,15 +39,15 @@ public class ReportService {
         Mono<List<GitRepository>> gitRepositories = gitHubClient.repositories(properties.getUser())
                 .switchIfEmpty(Mono.error(new Exception(String.format("Not found any repository for the user %s", properties.getUser()))))
                 .map(mapper::toGitRepository)
-                .flatMap(repos -> enqueueRepositoryReport(properties.getId(), repos));
+                .flatMap(repos -> enqueueRepositoryReport(properties.getUser(), repos));
 
-        Mono<ReportEntity> entity = reportRepository.findById(properties.getId());
+        Mono<ReportEntity> entity = reportRepository.findById(properties.getUser());
 
         Mono.zip(gitRepositories, entity)
                 .map(tuples -> tuples.getT2().addRepositories(tuples.getT1()))
                 .flatMap(reportRepository::save)
                 .doOnError(error -> log.error("Error to read github repositories.", error))
-                .subscribe(result -> log.info("Updated Report entity {} with {} repositories.", result.getId(), result.getRepositories().size()));
+                .subscribe(result -> log.info("Updated Report entity {} with {} repositories.", result.getUser(), result.getRepositories().size()));
     }
 
     private Mono<List<GitRepository>> enqueueRepositoryReport(String reportId, List<GitRepository> gitRepositories) {
@@ -71,7 +72,7 @@ public class ReportService {
             List<Languages> languages = mapLanguages
                     .entrySet()
                     .stream()
-                    .map(entry -> new Languages(entry.getKey(), entry.getValue(), BigDecimal.valueOf((entry.getValue() * 100) / totalSize)))
+                    .map(entry -> new Languages(entry.getKey(), entry.getValue(), getPercentage(totalSize, entry.getValue())))
                     .collect(Collectors.toList());
 
             RepositoryLanguagesEntity entity =
@@ -82,5 +83,10 @@ public class ReportService {
 
         log.warn("## Empty language repository {} ", repository.getName());
         return Mono.empty();
+    }
+
+    private BigDecimal getPercentage(long totalSize, long entry) {
+        double percent = (entry * 100) / (double) totalSize;
+       return new BigDecimal(percent).setScale(2, RoundingMode.FLOOR);
     }
 }

@@ -14,8 +14,6 @@ import java.util.List;
 public class ReportEntity {
 
     @Id
-    private String id;
-
     private String user;
 
     private String provider;

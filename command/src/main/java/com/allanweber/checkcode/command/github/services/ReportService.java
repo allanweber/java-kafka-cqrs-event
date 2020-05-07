@@ -29,7 +29,7 @@ public class ReportService {
         String provider = "GITHUB";
         ReportEntity entity = new ReportEntity(user, provider);
 
-        return reportRepository.insert(entity)
+        return reportRepository.save(entity)
                 .map(mapper::fromEntity)
                 .map(properties -> {
                     try {
