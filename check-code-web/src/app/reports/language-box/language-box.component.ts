@@ -17,12 +17,12 @@ export class LanguageBoxComponent implements OnInit {
       position: 'left',
     },
     plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
-        },
-      },
+      // datalabels: {
+      //   formatter: (value, ctx) => {
+      //     const label = ctx.chart.data.labels[ctx.dataIndex];
+      //     return label;
+      //   },
+      // },
     }
   };
   public barChartLabels = [];

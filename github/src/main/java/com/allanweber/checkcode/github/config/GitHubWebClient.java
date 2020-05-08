@@ -24,7 +24,7 @@ public class GitHubWebClient {
                 .baseUrl("https://api.github.com")
                 .filter(logRequest())
                 .filter(errorResponse())
-                .defaultHeader("Authorization", "Bearer 45dcaa1f931131bb5881df17b90f065b5ba7eae8")
+                .defaultHeader("Authorization", "Bearer aa4f3ad8a922ce6995e98d5b52d6959b62f08438")
                 .build();
     }
 
