@@ -20,6 +20,7 @@ public class GitRoutes {
     public RouterFunction<?> userRoutes(UserHandlers userHandlers, ReportHandlers reportHandlers) {
         return nest(path("/github"),
                 route(GET("/users").and(accept(APPLICATION_JSON)), userHandlers::getUsers)
+                        .and(route(GET("/reports").and(accept(APPLICATION_JSON)), reportHandlers::getReports))
                 .and(route(GET("/reports/{id}").and(accept(APPLICATION_JSON)), reportHandlers::getReport))
                 .and(route(GET("/reports/{id}/repositories").and(accept(APPLICATION_JSON)), reportHandlers::getRepositories))
         );

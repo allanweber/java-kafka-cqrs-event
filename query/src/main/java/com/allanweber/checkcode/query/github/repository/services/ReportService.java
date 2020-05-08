@@ -23,6 +23,11 @@ public class ReportService {
 
     private final ReportMapper mapper = Mappers.getMapper(ReportMapper.class);
 
+    public Flux<Report> getReports() {
+        return reportRepository.findAll()
+                .map(mapper::fromEntity);
+    }
+
     public Mono<Report> getReport(String reportId) {
         return reportRepository.findById(reportId)
                 .switchIfEmpty(Mono.error(new HttpClientErrorException(NOT_FOUND, String.format("Report %s not found", reportId))))

@@ -1,0 +1,10 @@
+<div class="field">
+  <div class="control is-large" [ngClass]="{'is-loading': loading}">
+    <input class="input is-large" type="text" placeholder="Type the user name" #input>
+  </div>
+  <div>
+    <div class="container">
+      <check-code-search-result [users]=users></check-code-search-result>
+    </div>
+  </div>
+</div>

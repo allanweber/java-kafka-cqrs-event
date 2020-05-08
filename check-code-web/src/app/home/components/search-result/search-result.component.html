@@ -1,0 +1,30 @@
+<div class="users-container">
+  <div class="user-box" *ngFor="let user of users">
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img [src]=user.avatar [routerLink]="['/reports',user.login,'results']">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <a [routerLink]="['/reports',user.login,'results']"><strong>@{{ user.login }}</strong></a>
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-left">
+            <a class="level-item">
+              <button class="button is-small is-success" (click)="createReport(user.login)">
+                <span class="icon is-small">
+                  <i class="fas fa-retweet"></i>
+                </span>
+                <span>Create Report</span>
+              </button>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </article>
+  </div>
+</div>

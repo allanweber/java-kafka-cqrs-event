@@ -1,0 +1,34 @@
+<h4 class="title is-4">Last Reports</h4>
+<button class="button is-text" [routerLink]="['/home']">Back</button>
+<div class="container">
+  <div class="box">
+    <div class="container" *ngIf="showNotification(); else data">
+      <div class="notification">
+        There is not reports to show
+      </div>
+    </div>
+    <ng-template #data>
+      <div class="container">
+        <div class="users-container">
+          <div class="user-box" *ngFor="let report of reports">
+            <article class="media">
+              <!-- <figure class="media-left">
+                <p class="image is-64x64">
+                  <img [src]=user.avatar [routerLink]="['/reports',user.login,'results']">
+                </p>
+              </figure> -->
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <a [routerLink]="['/reports/', report.user,'results']"><strong>@{{ report.user }}</strong></a>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+  </div>
+</div>

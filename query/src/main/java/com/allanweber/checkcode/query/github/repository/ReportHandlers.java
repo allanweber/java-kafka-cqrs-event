@@ -17,13 +17,17 @@ public class ReportHandlers {
 
     private final ReportService reportService;
 
+    public Mono<ServerResponse> getReports(ServerRequest request) {
+        return ok().body(reportService.getReports(), Report.class);
+    }
+
     public Mono<ServerResponse> getReport(ServerRequest request) {
-        String id = request.pathVariable("id");
+        String id = request.pathVariable("id").toLowerCase();
         return ok().body(reportService.getReport(id), Report.class);
     }
 
     public Mono<ServerResponse> getRepositories(ServerRequest request) {
-        String id = request.pathVariable("id");
+        String id = request.pathVariable("id").toLowerCase();
         return ok().body(reportService.getRepositoryLanguages(id), RepositoryLanguages.class);
     }
 }

@@ -1,0 +1,23 @@
+<h3 class="title is-3">
+  <button class="button is-small is-light" [routerLink]="['/home']">home</button>
+
+  <button class="button is-small is-light" [routerLink]="['/reports']">Reports</button>
+</h3>
+<div class="container">
+  <div class="box">
+    <div class="container" *ngIf="showNotification(); else data">
+      <div class="notification">
+        The user <strong>{{ user }}</strong> does not have a report yet.
+      </div>
+    </div>
+    <ng-template #data>
+
+      <div class="language-container">
+        <div class="box" *ngFor="let repo of result">
+          <h4 class="title is-4 has-text-centered">{{ repo.name }}</h4>
+          <check-code-language-box [languages]="repo.languages"></check-code-language-box>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
