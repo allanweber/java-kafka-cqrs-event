@@ -14,7 +14,7 @@ public class AllEventsListener {
     @KafkaListener(topicPattern = ".*")
     public void listen(List<ConsumerRecord<String, Object>> records){
         StringBuilder message = new StringBuilder();
-        log.info("Receiving {} records", records.size() );
+        log.info("Receiving {} records", records.size());
 
         for (var record: records) {
             message.append("-------------------------------------------------------------------").append(System.lineSeparator())
