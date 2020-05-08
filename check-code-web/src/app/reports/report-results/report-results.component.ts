@@ -15,13 +15,13 @@ export class ReportResultsComponent implements OnInit, OnDestroy {
   private serviceSubscription: Subscription;
 
   public user: string;
-  public result: ReportRepository[] = [];
+  public result: ReportRepository[];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private messageService: FeedbackMessageService,
-    private reportService: ReportService,
+    private reportService: ReportService
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +29,8 @@ export class ReportResultsComponent implements OnInit, OnDestroy {
       if (params.id) {
         this.user = params.id;
         this.serviceSubscription = this.reportService
-        .getRepositoriesReport(this.user)
-        .subscribe(response => (this.result = response));
+          .getRepositoriesReport(this.user)
+          .subscribe((response) => (this.result = response));
       } else {
         this.messageService.showWarningMessage('Invalid user');
         this.router.navigate(['/home']);
@@ -38,8 +38,10 @@ export class ReportResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  showNotification(){
-    return this.result.length === 0;
+  showNotification() {
+    if (this.result) {
+      return this.result.length === 0;
+    }
   }
 
   ngOnDestroy(): void {
