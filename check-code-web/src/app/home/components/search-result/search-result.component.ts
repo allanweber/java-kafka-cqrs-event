@@ -22,7 +22,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  createReport(user: string) {
+  createReport(user: UserModel) {
     this.subscription = this.createReportService.createReport(user).subscribe(
       (response) => {
         this.messageService.showSuccessMessage(

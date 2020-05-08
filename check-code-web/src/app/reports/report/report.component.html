@@ -11,12 +11,12 @@
       <div class="container">
         <div class="users-container">
           <div class="user-box" *ngFor="let report of reports">
-            <article class="media">
-              <!-- <figure class="media-left">
+            <article class="media" [routerLink]="['/reports/', report.user,'results']">
+              <figure class="media-left">
                 <p class="image is-64x64">
-                  <img [src]=user.avatar [routerLink]="['/reports',user.login,'results']">
+                  <img [src]=report.avatar>
                 </p>
-              </figure> -->
+              </figure>
               <div class="media-content">
                 <div class="content">
                   <p>

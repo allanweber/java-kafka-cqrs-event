@@ -20,7 +20,6 @@ public class UserHandlers {
 
     public Mono<ServerResponse> getUsers(ServerRequest request) {
         String query = request.queryParam("query")
-                .map(String::toLowerCase)
                 .map(String::trim)
                 .orElseThrow(() -> new HttpClientErrorException(BAD_REQUEST, "Invalid user query"));
 

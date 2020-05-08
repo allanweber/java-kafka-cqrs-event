@@ -22,12 +22,12 @@ public class ReportHandlers {
     }
 
     public Mono<ServerResponse> getReport(ServerRequest request) {
-        String id = request.pathVariable("id").toLowerCase();
+        String id = request.pathVariable("id");
         return ok().body(reportService.getReport(id), Report.class);
     }
 
     public Mono<ServerResponse> getRepositories(ServerRequest request) {
-        String id = request.pathVariable("id").toLowerCase();
+        String id = request.pathVariable("id");
         return ok().body(reportService.getRepositoryLanguages(id), RepositoryLanguages.class);
     }
 }

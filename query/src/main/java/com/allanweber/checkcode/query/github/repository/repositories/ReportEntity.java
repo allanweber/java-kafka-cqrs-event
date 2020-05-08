@@ -14,4 +14,8 @@ public class ReportEntity {
     private String user;
 
     private String provider;
+
+    private String avatar;
+
+    private String repos;
 }

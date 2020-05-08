@@ -15,8 +15,14 @@ public class ReportEntity {
 
     private String provider;
 
-    public ReportEntity(String user, String provider) {
+    private String avatar;
+
+    private String repos;
+
+    public ReportEntity(String user, String provider, String avatar, String repos) {
         this.user = user;
         this.provider = provider;
+        this.avatar = avatar;
+        this.repos = repos;
     }
 }

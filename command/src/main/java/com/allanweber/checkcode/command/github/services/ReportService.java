@@ -1,5 +1,6 @@
 package com.allanweber.checkcode.command.github.services;
 
+import com.allanweber.checkcode.command.github.dto.UserRequest;
 import com.allanweber.checkcode.command.github.repositories.ReportEntity;
 import com.allanweber.checkcode.command.github.repositories.ReportRepository;
 import com.allanweber.checkcode.command.mapper.ReportMapper;
@@ -24,10 +25,10 @@ public class ReportService {
 
     private final ReportMapper mapper = Mappers.getMapper(ReportMapper.class);
 
-    public Mono<ReportProperties> startReport(@NotBlank String user) {
+    public Mono<ReportProperties> startReport(@NotBlank UserRequest user) {
 
         String provider = "GITHUB";
-        ReportEntity entity = new ReportEntity(user, provider);
+        ReportEntity entity = new ReportEntity(user.getLogin(), provider, user.getAvatar(), user.getRepos());
 
         return reportRepository.save(entity)
                 .map(mapper::fromEntity)

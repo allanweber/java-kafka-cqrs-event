@@ -16,7 +16,7 @@ class ReportMapperTest {
 
     @Test
     public void map() {
-        ReportEntity entity = new ReportEntity("user", "git");
+        ReportEntity entity = new ReportEntity("user", "git", "av", "re");
         ReportProperties properties = mapper.fromEntity(entity);
 
         assertEquals("user", properties.getUser());
